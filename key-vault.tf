@@ -1,0 +1,27 @@
+locals {
+  key_vault_name = "${var.product}-${var.env}"
+}
+
+module "wa_key_vault" {
+  source                     = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  name                       = "${local.key_vault_name}"
+  product                    = "${var.product}"
+  env                        = "${var.env}"
+  tenant_id                  = "${var.tenant_id}"
+  object_id                  = "${var.jenkins_AAD_objectId}"
+  resource_group_name        = "${azurerm_resource_group.rg.name}"
+  product_group_object_id    = "${var.wa_product_group_object_id}"
+
+  location                   = "${var.location}"
+  common_tags                = "${local.common_tags}"
+  managed_identity_object_id = "${var.managed_identity_object_id}"
+}
+
+output "vaultName" {
+  value = "${local.key_vault_name}"
+}
+
+data "azurerm_key_vault" "wa_key_vault" {
+  name                = "wa-${var.env}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+}

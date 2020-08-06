@@ -1,2 +1,3 @@
 # wa-shared-infrastructure
-Work allocation sahred infrastructure
+
+This repository contains the shared common infrastructure components for Work Allocation.
