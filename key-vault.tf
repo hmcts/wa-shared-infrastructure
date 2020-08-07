@@ -19,6 +19,7 @@ module "wa_key_vault" {
 
   location                   = "${var.location}"
   common_tags                = "${local.common_tags}"
+  create_managed_identity    = true
   managed_identity_object_ids = ["${data.azurerm_user_assigned_identity.wa-identity.principal_id}"]
 }
 
