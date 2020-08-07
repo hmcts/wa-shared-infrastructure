@@ -14,7 +14,7 @@ module "wa_key_vault" {
 
   location                   = "${var.location}"
   common_tags                = "${local.common_tags}"
-  managed_identity_object_id = "${var.managed_identity_object_id}"
+  create_managed_identity = true
 }
 
 output "vaultName" {
