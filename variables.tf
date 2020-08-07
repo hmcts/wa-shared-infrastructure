@@ -26,7 +26,7 @@ variable "jenkins_AAD_objectId" {
 
 variable "wa_product_group_object_id" {
   type    = "string"
-  default = "09cab722-d7e8-11ea-87d0-0242ac130003"
+  default = "cdeb331b-adfe-46a7-a2c8-a628e2d35d96"
 }
 
 variable "team_name" {
