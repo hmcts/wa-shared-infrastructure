@@ -2,11 +2,6 @@ locals {
   key_vault_name = "${var.product}-${var.env}"
 }
 
-data "azurerm_user_assigned_identity" "wa-identity" {
- name                = "${var.product}-${var.env}-mi"
- resource_group_name = "managed-identities-${var.env}-rg"
-}
-
 module "wa_key_vault" {
   source                     = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
   name                       = "${local.key_vault_name}"
@@ -20,7 +15,6 @@ module "wa_key_vault" {
   location                   = "${var.location}"
   common_tags                = "${local.common_tags}"
   create_managed_identity    = true
-  managed_identity_object_ids = ["${data.azurerm_user_assigned_identity.wa-identity.principal_id}"]
 }
 
 output "vaultName" {
