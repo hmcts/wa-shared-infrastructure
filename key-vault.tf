@@ -1,3 +1,7 @@
+provider "azurerm" {
+  version = "1.44.0"
+}
+
 locals {
   key_vault_name = "${var.product}-${var.env}"
 }
