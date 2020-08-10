@@ -50,3 +50,17 @@ variable "destroy_me" {
 variable "managed_identity_object_id" {
   default = ""
 }
+
+// as of now, UK South is unavailable for Application Insights
+variable "appinsights_location" {
+  type        = "string"
+  default     = "West Europe"
+  description = "Location for Application Insights"
+
+}
+
+variable "appinsights_application_type" {
+  type        = "string"
+  default     = "web"
+  description = "Type of Application Insights (Web/Other)"
+}
