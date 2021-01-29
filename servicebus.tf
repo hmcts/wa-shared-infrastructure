@@ -1,0 +1,45 @@
+// Azure service bus
+locals {
+  topic_name        = "${var.product}-case-event-topic-${var.env}"
+  subscription_name = "${var.product}-case-event-subscription-${var.env}"
+  servicebus_namespace_name       = "${var.product}-servicebus-${var.env}"
+  resource_group_name             = "${var.product}-${var.env}"
+
+  tags = merge(
+  var.common_tags,
+  map(
+  "Team Contact", "#wa-tech",
+  "Team Name", "WA Team"
+  )
+  )
+}
+
+//Create namespace
+module "servicebus-namespace" {
+  source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=master"
+  name                = local.servicebus_namespace_name
+  location            = var.location
+  resource_group_name = local.resource_group_name
+  env                 = var.env
+  common_tags         = local.tags
+  sku                 = "Premium"
+}
+
+//Create topic
+module "topic" {
+  source                = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
+  name                  = local.topic_name
+  namespace_name        = module.servicebus-namespace.name
+  resource_group_name   = local.resource_group_name
+}
+
+//Create subscription
+module "subscription" {
+//  The branch require_session needs to be merged to master
+  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=require_session"
+  name                  = local.subscription_name
+  namespace_name        = local.servicebus_namespace_name
+  topic_name            = local.topic_name
+  resource_group_name   = local.resource_group_name
+  requires_session      = true
+}
