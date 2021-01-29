@@ -3,15 +3,8 @@ locals {
   topic_name        = "${var.product}-case-event-topic-${var.env}"
   subscription_name = "${var.product}-case-event-subscription-${var.env}"
   servicebus_namespace_name       = "${var.product}-servicebus-${var.env}"
-  resource_group_name             = "${var.product}-${var.env}"
+  resource_group_name             = azurerm_resource_group.rg.name
 
-  tags = merge(
-  var.common_tags,
-  map(
-  "Team Contact", "#wa-tech",
-  "Team Name", "WA Team"
-  )
-  )
 }
 
 //Create namespace
@@ -21,7 +14,7 @@ module "servicebus-namespace" {
   location            = var.location
   resource_group_name = local.resource_group_name
   env                 = var.env
-  common_tags         = local.tags
+  common_tags         = local.common_tags
   sku                 = "Premium"
 }
 
