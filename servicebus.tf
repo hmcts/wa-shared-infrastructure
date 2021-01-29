@@ -19,7 +19,7 @@ module "servicebus-namespace" {
 }
 
 //Create topic
-module "topic" {
+module "case-event-handler-topic" {
   source                = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
   name                  = local.topic_name
   namespace_name        = module.servicebus-namespace.name
@@ -27,7 +27,7 @@ module "topic" {
 }
 
 //Create subscription
-module "subscription" {
+module "case-event-handler-subscription" {
 //  The branch require_session needs to be merged to master
   source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=require_session"
   name                  = local.subscription_name
