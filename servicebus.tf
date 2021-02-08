@@ -9,8 +9,7 @@ locals {
 
 //Create subscription
 module "subscription" {
-//fixme:  The branch require_session needs to be merged to master
-  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=require_session"
+  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
   name                  = local.subscription_name
   namespace_name        = local.servicebus_namespace_name
   topic_name            = local.topic_name
