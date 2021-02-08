@@ -17,4 +17,5 @@ module "subscription" {
   resource_group_name   = local.resource_group_name
   requires_session      = true
   max_delivery_count    = 2000
+  lock_duration         = "PT30S"
 }
