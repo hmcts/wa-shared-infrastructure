@@ -16,4 +16,5 @@ module "subscription" {
   topic_name            = local.topic_name
   resource_group_name   = local.resource_group_name
   requires_session      = true
+  max_delivery_count    = 2000
 }
