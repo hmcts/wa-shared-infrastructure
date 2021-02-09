@@ -3,7 +3,7 @@ locals {
   topic_name        = "ccd-case-events-${var.env}"
   subscription_name = "${var.product}-case-events-sub-${var.env}"
   servicebus_namespace_name       = "ccd-servicebus-${var.env}"
-  resource_group_name             = azurerm_resource_group.rg.name
+  resource_group_name             = "ccd-shared-${var.env}"
 
 }
 
