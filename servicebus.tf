@@ -17,3 +17,13 @@ module "subscription" {
   requires_session      = true
   lock_duration         = "PT30S"
 }
+
+resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
+  name      = "sb-primary-connection-string"
+  value     = module.subscription.primary_send_and_listen_connection_string
+  key_vault_id = data.azurerm_key_vault.wa-key-vault.id
+}
+
+output "sb_primary_send_and_listen_connection_string" {
+  value = module.subscription.primary_send_and_listen_connection_string
+}
