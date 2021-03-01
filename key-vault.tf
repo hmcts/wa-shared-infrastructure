@@ -3,7 +3,7 @@ locals {
 }
 
 module "wa_key_vault" {
-  source                     = "git@github.com:hmcts/cnp-module-key-vault?ref=azurermv2"
+  source                     = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
   name                       = local.key_vault_name
   product                    = var.product
   env                        = var.env
