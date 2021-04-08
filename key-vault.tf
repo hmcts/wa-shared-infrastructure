@@ -16,3 +16,8 @@ module "wa_key_vault" {
   common_tags                = local.common_tags
   create_managed_identity    = true
 }
+
+data "azurerm_key_vault" "wa_key_vault" {
+  name                = "wa-${var.env}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+}
