@@ -5,7 +5,7 @@ data "azurerm_key_vault_secret" "wa_support_email" {
   key_vault_id = data.azurerm_key_vault.wa_key_vault.id
 }
 
-module "iac-action-group" {
+module "wa-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env

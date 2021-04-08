@@ -1,8 +1,8 @@
-module "ia-exception-alert" {
+module "wa-exception-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
   location = "${var.location}"
 
-  app_insights_name = "ia-${var.env}"
+  app_insights_name = "wa-${var.env}"
 
   alert_name = "wa-dlq-alert"
   alert_desc = "Triggers when a message falls into the Dead Letter Queue, works with 5 minute poll in wa-${var.env}."
