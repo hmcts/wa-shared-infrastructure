@@ -14,5 +14,5 @@ module "wa-action-group" {
   action_group_name      = "wa-support"
   short_name             = "wa-support"
   email_receiver_name    = "WA Support Mailing List"
-  email_receiver_address = "wa-support@HMCTS.NET"
+  email_receiver_address = "${data.azurerm_key_vault_secret.wa_support_email.value}"
 }
