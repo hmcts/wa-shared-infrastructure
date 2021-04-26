@@ -16,3 +16,4 @@ module "wa_key_vault" {
   common_tags                = local.common_tags
   create_managed_identity    = true
 }
+
