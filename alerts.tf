@@ -34,6 +34,6 @@ module "wa-camunda-task-unconfigured-exception-alert" {
   action_group_name = "wa-support"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
-  resourcegroup_name = azurerm_resource_group.rg.name
+  resourcegroup_name = "camunda-${var.env}"
   enabled = true
 }
