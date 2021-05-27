@@ -1,6 +1,6 @@
 module "wa-exception-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
-  location = "${var.location}"
+  location = var.location
 
   app_insights_name = "wa-${var.env}"
 
@@ -20,7 +20,7 @@ module "wa-exception-alert" {
 
 module "wa-camunda-task-unconfigured-exception-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
-  location = "${var.location}"
+  location = var.location
 
   app_insights_name = "camunda-bpm-appinsights-${var.env}"
 
