@@ -25,11 +25,11 @@ module "wa-camunda-task-unconfigured-exception-alert" {
   app_insights_name = "camunda-bpm-appinsights-${var.env}"
 
   alert_name = "wa-camunda-task-unconfigured-alert"
-  alert_desc = "Triggers when a task could not be configured and it is saved with an unconfigured task state, works with 5 minute poll in camunda-bpm-appinsights-${var.env}."
+  alert_desc = "Triggers when a task could not be configured and it is saved with an unconfigured task state, works with 60 minute poll in camunda-bpm-appinsights-${var.env}."
   app_insights_query = "union traces, exceptions | where customDimensions[\"LoggingLevel\"] == \"WARN\" and message contains \"Task could not be configured. Task state was set to 'unconfigured'\" | sort by timestamp desc"
   custom_email_subject = "Alert: A task could not be configure in wa-${var.env}"
-  frequency_in_minutes = 5
-  time_window_in_minutes = 5
+  frequency_in_minutes = 60
+  time_window_in_minutes = 60
   severity_level = "2"
   action_group_name = "wa-support"
   trigger_threshold_operator = "GreaterThan"
