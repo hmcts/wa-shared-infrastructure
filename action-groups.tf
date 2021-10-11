@@ -16,3 +16,15 @@ module "wa-action-group" {
   email_receiver_name    = "WA Support Mailing List"
   email_receiver_address = data.azurerm_key_vault_secret.wa_support_email.value
 }
+
+module "wa-action-group-camunda" {
+  source   = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env      = var.env
+
+  resourcegroup_name     = "camunda-${var.env}"
+  action_group_name      = "wa-support"
+  short_name             = "wa-support"
+  email_receiver_name    = "WA Support Mailing List"
+  email_receiver_address = data.azurerm_key_vault_secret.wa_support_email.value
+}
