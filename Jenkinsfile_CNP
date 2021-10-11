@@ -2,4 +2,9 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-withInfraPipeline('wa') {}
+def branchesToSync = ['demo']
+
+withInfraPipeline('wa') {
+  // Sync environment specific branches with master branch
+  syncBranchesWithMaster(branchesToSync)
+}
