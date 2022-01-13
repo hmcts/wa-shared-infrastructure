@@ -30,7 +30,7 @@ module "ccd_case_event_subscription" {
   lock_duration         = "PT30S"
 }
 
-resource "azurerm_servicebus_subscription_rule" "allowed_jurisidction" {
+resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
   name                = local.subscription_rule_name
   resource_group_name = local.resource_group_name
   namespace_name      = local.servicebus_namespace_name
