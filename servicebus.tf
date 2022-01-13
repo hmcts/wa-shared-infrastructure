@@ -37,5 +37,5 @@ resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
   topic_name          = local.topic_name
   subscription_name   = module.subscription.name
   filter_type         = "SqlFilter"
-  sql_filter          = "jurisdiction_id IN ('ia','wa','ssc')"
+  sql_filter          = "jurisdiction_id IN ('ia')"
 }
