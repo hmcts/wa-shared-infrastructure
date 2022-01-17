@@ -68,3 +68,9 @@ variable "appinsights_application_type" {
 variable "common_tags" {
   type = map(string)
 }
+
+variable "allowed_jurisdictions" {
+  type        = string
+  default = "'ia', 'sscs', 'wa'"
+  description = "Allowed jurisdictions ids for which ccd messages can be processed in case event handler"
+}
