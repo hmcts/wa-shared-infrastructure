@@ -2,10 +2,10 @@
 locals {
   topic_name                        = "ccd-case-events-${var.env}"
   subscription_name                 = "${var.product}-case-events-sub-${var.env}"
-  subscription_rule_name            = "${var.product}-case-events-sub-rule-${var.env}"
   servicebus_namespace_name         = "ccd-servicebus-${var.env}"
   resource_group_name               = "ccd-shared-${var.env}"
   ccd_case_events_subscription_name = "${var.product}-ccd-case-events-sub-${var.env}"
+  # This Expression helps create the instance only in aat by setting the count in aat to 1 and 0 on other envs
   message_context_instances_count   = var.env == "aat" ? 1 : 0
 }
 
@@ -32,7 +32,7 @@ module "ccd_case_event_subscription" {
 }
 
 resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
-  name                = local.subscription_rule_name
+  name                = "${var.product}-case-events-sub-rule-${var.env}"
   resource_group_name = local.resource_group_name
   namespace_name      = local.servicebus_namespace_name
   topic_name          = local.topic_name
@@ -43,7 +43,7 @@ resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
 
 resource "azurerm_servicebus_subscription_rule" "message_context" {
   count               = local.message_context_instances_count
-  name                = local.subscription_rule_name
+  name                = "${var.product}-message-context-sub-rule-${var.env}"
   resource_group_name = local.resource_group_name
   namespace_name      = local.servicebus_namespace_name
   topic_name          = local.topic_name
