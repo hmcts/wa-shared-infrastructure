@@ -6,7 +6,7 @@ locals {
   resource_group_name               = "ccd-shared-${var.env}"
   ccd_case_events_subscription_name = "${var.product}-ccd-case-events-sub-${var.env}"
   # This Expression helps create the instance only in aat by setting the count in aat to 1 and 0 on other envs
-  message_context_instances_count   = var.env == "aat" ? 1 : 0
+  message_context_instances_count   = var.env == "aat" ? 0 : 0
 }
 
 //Create subscription
