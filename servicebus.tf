@@ -48,5 +48,5 @@ resource "azurerm_servicebus_subscription_rule" "message_context" {
   topic_name          = local.topic_name
   subscription_name   = local.subscription_name
   filter_type         = "SqlFilter"
-  sql_filter          = "message_context LIKE 'wa-ft%'"
+  sql_filter          = "1=1"
 }
