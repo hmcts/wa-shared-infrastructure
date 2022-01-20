@@ -6,6 +6,7 @@ locals {
   servicebus_namespace_name         = "ccd-servicebus-${var.env}"
   resource_group_name               = "ccd-shared-${var.env}"
   ccd_case_events_subscription_name = "${var.product}-ccd-case-events-sub-${var.env}"
+  message_context_instances_count   = var.env == "aat" ? 1 : 0
 }
 
 //Create subscription
@@ -41,7 +42,7 @@ resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
 }
 
 resource "azurerm_servicebus_subscription_rule" "message_context" {
-  count               = var.env == "aat" ? 1 : 0
+  count               = local.message_context_instances_count
   name                = local.subscription_rule_name
   resource_group_name = local.resource_group_name
   namespace_name      = local.servicebus_namespace_name
