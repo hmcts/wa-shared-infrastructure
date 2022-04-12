@@ -15,6 +15,7 @@ module "wa-exception-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
   resourcegroup_name = azurerm_resource_group.rg.name
+  common_tags = var.common_tags
   enabled = true
 }
 
@@ -35,6 +36,7 @@ module "wa-camunda-task-unconfigured-exception-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
   resourcegroup_name = "camunda-${var.env}"
+  common_tags = var.common_tags
   enabled = true
 }
 
@@ -55,6 +57,7 @@ module "wa-camunda-task-uninitiated-exception-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
   resourcegroup_name = azurerm_resource_group.rg.name
+  common_tags = var.common_tags
   enabled = true
 }
 
@@ -75,5 +78,6 @@ module "wa-camunda-task-unterminated-exception-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
   resourcegroup_name = azurerm_resource_group.rg.name
+  common_tags = var.common_tags
   enabled = true
 }
