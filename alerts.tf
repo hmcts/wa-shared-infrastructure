@@ -16,6 +16,7 @@ module "wa-exception-alert" {
   trigger_threshold = 0
   resourcegroup_name = azurerm_resource_group.rg.name
   enabled = true
+  common_tags = local.common_tags
 }
 
 module "wa-camunda-task-unconfigured-exception-alert" {
@@ -36,4 +37,5 @@ module "wa-camunda-task-unconfigured-exception-alert" {
   trigger_threshold = 0
   resourcegroup_name = "camunda-${var.env}"
   enabled = true
+  common_tags = local.common_tags
 }
