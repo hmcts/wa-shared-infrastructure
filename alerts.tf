@@ -44,7 +44,7 @@ module "wa-messages-find-problem-messages-alert" {
   source = "git@github.com:hmcts/cnp-module-metric-alert"
   location = var.location
 
-  app_insights_name = "wa-${var.env}"
+  app_insights_name = "case-event-handler-appinsights-${var.env}"
 
   alert_name = "wa-case-event-handler-find-problem-messages-alert"
   alert_desc = "Triggers when a ccd message is unprocessable state or remains in ready state for more than 1 hour, works with 60 minute poll in case-event-handler-appinsights-${var.env}."
