@@ -16,7 +16,7 @@ module "wa-exception-alert" {
   trigger_threshold = 0
   resourcegroup_name = azurerm_resource_group.rg.name
   enabled = true
-  common_tags = local.common_tags
+  common_tags = var.common_tags
 }
 
 module "wa-camunda-task-unconfigured-exception-alert" {
@@ -37,7 +37,7 @@ module "wa-camunda-task-unconfigured-exception-alert" {
   trigger_threshold = 0
   resourcegroup_name = "camunda-${var.env}"
   enabled = true
-  common_tags = local.common_tags
+  common_tags = var.common_tags
 }
 
 module "wa-messages-find-problem-messages-alert" {
@@ -57,6 +57,6 @@ module "wa-messages-find-problem-messages-alert" {
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold = 0
   resourcegroup_name =azurerm_resource_group.rg.name
-  common_tags = local.common_tags
+  common_tags = var.common_tags
   enabled = true
 }
