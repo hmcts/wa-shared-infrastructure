@@ -17,7 +17,6 @@ module "wa-exception-alert" {
   resourcegroup_name = azurerm_resource_group.rg.name
   common_tags = var.common_tags
   enabled = true
-  common_tags = var.common_tags
 }
 
 module "wa-camunda-task-unconfigured-exception-alert" {
@@ -81,7 +80,6 @@ module "wa-camunda-task-unterminated-exception-alert" {
   resourcegroup_name = azurerm_resource_group.rg.name
   common_tags = var.common_tags
   enabled = true
-  common_tags = var.common_tags
 }
 
 module "wa-messages-find-problem-messages-alert" {
