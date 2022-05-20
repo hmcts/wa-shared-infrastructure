@@ -13,7 +13,7 @@ module "wa_key_vault" {
   product_group_object_id    = var.wa_product_group_object_id
 
   location                   = var.location
-  common_tags                = local.common_tags
+  common_tags                = var.common_tags
   create_managed_identity    = true
 }
 
