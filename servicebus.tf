@@ -36,10 +36,7 @@ module "ccd_case_event_subscription" {
 resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
   count               = local.case_events_sub_rule_instances_count
   name                = "${var.product}-case-events-sub-rule-${var.env}"
-  resource_group_name = local.resource_group_name
-  namespace_name      = local.servicebus_namespace_name
-  topic_name          = local.topic_name
-  subscription_name   = local.subscription_name
+  subscription_id     = local.subscription_name
   filter_type         = "SqlFilter"
   sql_filter          = "1=1"
 }
@@ -47,10 +44,7 @@ resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
 resource "azurerm_servicebus_subscription_rule" "message_context" {
   count               = local.message_context_instances_count
   name                = "${var.product}-message-context-sub-rule-${var.env}"
-  resource_group_name = local.resource_group_name
-  namespace_name      = local.servicebus_namespace_name
-  topic_name          = local.topic_name
-  subscription_name   = local.subscription_name
+  subscription_id     = local.subscription_name
   filter_type         = "SqlFilter"
   sql_filter          = "message_context LIKE 'wa-ft%'"
 }
