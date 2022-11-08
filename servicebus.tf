@@ -38,7 +38,7 @@ resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
   name                = "${var.product}-case-events-sub-rule-${var.env}"
   subscription_id     = module.subscription.id
   filter_type         = "SqlFilter"
-  sql_filter          = "1=1"
+  sql_filter          = "LOWER(jurisdiction_id) IN (${var.allowed_jurisdictions})"
 }
 
 resource "azurerm_servicebus_subscription_rule" "message_context" {
@@ -46,5 +46,5 @@ resource "azurerm_servicebus_subscription_rule" "message_context" {
   name                = "${var.product}-message-context-sub-rule-${var.env}"
   subscription_id     = module.subscription.id
   filter_type         = "SqlFilter"
-  sql_filter          = "message_context LIKE 'wa-ft%'"
+  sql_filter          = "LOWER(jurisdiction_id) IN (${var.allowed_jurisdictions}) AND message_context LIKE 'wa-ft%'"
 }
