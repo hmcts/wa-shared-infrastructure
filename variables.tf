@@ -71,6 +71,6 @@ variable "common_tags" {
 
 variable "allowed_jurisdictions" {
   type        = string
-  default = "'ia', 'IA', 'sscs', 'SSCS', 'wa', 'WA'"
+  default = "'ia', 'IA', 'sscs', 'SSCS', 'wa', 'WA', 'civil', 'CIVIL', 'publiclaw', 'PUBLICLAW', 'privatelaw', 'PRIVATELAW', 'employment','EMPLOYMENT'"
   description = "Allowed jurisdictions ids for which ccd messages can be processed in case event handler"
 }

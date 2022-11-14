@@ -38,7 +38,7 @@ resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
   name                = "${var.product}-case-events-sub-rule-${var.env}"
   subscription_id     = module.ccd_case_event_subscription.id
   filter_type         = "SqlFilter"
-  sql_filter          = "1=1"
+  sql_filter          = "jurisdiction_id IN (${var.allowed_jurisdictions})"
 }
 
 resource "azurerm_servicebus_subscription_rule" "message_context" {
