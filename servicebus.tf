@@ -1,7 +1,6 @@
 // Azure service bus
 locals {
   topic_name                        = "ccd-case-events-${var.env}"
-  subscription_name                 = "${var.product}-case-events-sub-${var.env}"
   servicebus_namespace_name         = "ccd-servicebus-${var.env}"
   resource_group_name               = "ccd-shared-${var.env}"
   ccd_case_events_subscription_name = "${var.product}-ccd-case-events-sub-${var.env}"
