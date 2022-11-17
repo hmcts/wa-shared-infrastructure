@@ -14,6 +14,7 @@ locals {
 //Create subscription
 module "subscription" {
   source              = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
+  count               = local.case_events_sub_rule_instances_count
   name                = local.subscription_name
   namespace_name      = local.servicebus_namespace_name
   topic_name          = local.topic_name
