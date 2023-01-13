@@ -1,1 +1,1 @@
-allowed_jurisdictions = "'ia', 'IA'"
+allowed_jurisdictions = "'ia', 'IA','civil', 'CIVIL'"
