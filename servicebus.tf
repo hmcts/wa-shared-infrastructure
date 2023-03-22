@@ -34,5 +34,5 @@ resource "azurerm_servicebus_subscription_rule" "message_context" {
   name                = "${var.product}-message-context-sub-rule-${var.env}"
   subscription_id     = module.ccd_case_event_subscription.id
   filter_type         = "SqlFilter"
-  sql_filter          = "jurisdiction_id IN (${var.allowed_jurisdictions}) AND message_context LIKE 'wa-ft%'"
+  sql_filter          = "jurisdiction_id IN (${var.allowed_jurisdictions})"
 }
