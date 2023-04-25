@@ -68,7 +68,7 @@ variable "appinsights_application_type" {
 variable "common_tags" {
   type = map(string)
 }
-
+#this is the default value for any environment without a override file
 variable "allowed_jurisdictions" {
   type        = string
   default = "'ia', 'IA', 'civil', 'CIVIL'"
