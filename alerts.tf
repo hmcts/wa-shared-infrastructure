@@ -69,7 +69,7 @@ module "wa-messages-find-problem-messages-alert" {
 
   alert_name = "wa-case-event-handler-find-problem-messages-alert"
   alert_desc = "Triggers when a ccd message is unprocessable state or remains in ready state for more than 1 hour, works with 60 minute poll in case-event-handler-appinsights-${var.env}."
-  app_insights_query = "union traces | where customDimensions[\"LoggingLevel\"] in (\"INFO\", \"WARN\") and message contains \"FIND_PROBLEM_MESSAGES Retrieved problem messages\" and ( message contains \"UNPROCESSABLE\" or message contains \"READY\") | sort by timestamp desc"
+  app_insights_query = "union traces | where message contains \"FIND_PROBLEM_MESSAGES Retrieved problem messages\" and ( message contains \"UNPROCESSABLE\" or message contains \"READY\") | sort by timestamp desc"
   custom_email_subject = "Alert: some CCD messages could not be processed in wa-${var.env}"
   frequency_in_minutes = "60"
   time_window_in_minutes = "60"
