@@ -6,7 +6,7 @@ module "wa-exception-alert" {
 
   alert_name = "wa-dlq-alert"
   alert_desc = "Triggers when a message falls into the Dead Letter Queue, works with 5 minute poll in wa-${var.env}."
-  app_insights_query = "union traces, exceptions | where customDimensions[\"LoggingLevel\"] == \"WARN\" and customDimensions[\"Logger Message\"] contains \"dead lettered\" | sort by timestamp desc"
+  app_insights_query = "union traces, exceptions | where customDimensions[\"Logger Message\"] contains \"dead lettered\" | sort by timestamp desc"
   custom_email_subject = "Alert: Message was dead-lettered in wa-${var.env}"
   frequency_in_minutes = "5"
   time_window_in_minutes = "5"
@@ -27,7 +27,7 @@ module "wa-camunda-task-uninitiated-exception-alert" {
 
   alert_name = "wa-camunda-task-uninitiated-alert"
   alert_desc = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, works with 120 minute poll in wa-${var.env}."
-  app_insights_query = "union traces, exceptions | where customDimensions[\"LoggingLevel\"] == \"WARN\" and message contains \"TASK_INITIATION_FAILURES There are some uninitiated tasks\" | sort by timestamp desc"
+  app_insights_query = "union traces, exceptions | where message contains \"TASK_INITIATION_FAILURES There are some uninitiated tasks\" | sort by timestamp desc"
   custom_email_subject = "Alert: A task could not be initiated in wa-${var.env}"
   frequency_in_minutes = "60"
   time_window_in_minutes = "60"
@@ -48,7 +48,7 @@ module "wa-camunda-task-unterminated-exception-alert" {
 
   alert_name = "wa-camunda-task-unterminated-alert"
   alert_desc = "Triggers when a task could not be terminated, works with 120 minute poll in wa-${var.env}."
-  app_insights_query = "union traces, exceptions | where customDimensions[\"LoggingLevel\"] == \"WARN\" and message contains \"TASK_TERMINATION_FAILURES There are some unterminated tasks\" | sort by timestamp desc"
+  app_insights_query = "union traces, exceptions | where message contains \"TASK_TERMINATION_FAILURES There are some unterminated tasks\" | sort by timestamp desc"
   custom_email_subject = "Alert: A task could not be terminated in wa-${var.env}"
   frequency_in_minutes = "60"
   time_window_in_minutes = "60"
@@ -90,7 +90,7 @@ module "wa-cft-task-reconfiguration-exception-alert" {
 
   alert_name = "wa-task-management-api-reconfiguration-exception-alert"
   alert_desc = "Triggers when a task could not be reconfigured for a defined time in task-management-api-appinsights-${var.env}."
-  app_insights_query = "union traces | where customDimensions[\"LoggingLevel\"] == \"INFO\" and message contains \"Task Execute Reconfiguration Failed\" | sort by timestamp desc"
+  app_insights_query = "union traces | where message contains \"Task Execute Reconfiguration Failed\" | sort by timestamp desc"
   custom_email_subject = "Alert: some tasks could not be reconfigured in wa-${var.env}"
   frequency_in_minutes = "60"
   time_window_in_minutes = "60"
