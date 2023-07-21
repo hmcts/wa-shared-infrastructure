@@ -102,3 +102,24 @@ module "wa-cft-task-reconfiguration-exception-alert" {
   common_tags = var.common_tags
   enabled = true
 }
+
+module "wa-task-replication-problem-alert" {
+  source = "git@github.com:hmcts/cnp-module-metric-alert"
+  location = var.location
+
+  app_insights_name = "wa-${var.env}"
+
+  alert_name = "wa-task-management-api-replication-problem-alert"
+  alert_desc = "Triggers when a task could not be replicated in task-management-api-appinsights-${var.env}."
+  app_insights_query = "union traces | where message contains \"TASK_REPLICATION_ERROR: \" | sort by timestamp desc"
+  custom_email_subject = "Alert: some tasks could not be replicated in wa-${var.env}"
+  frequency_in_minutes = "60"
+  time_window_in_minutes = "60"
+  severity_level = "2"
+  action_group_name = "wa-support"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold = "0"
+  resourcegroup_name =azurerm_resource_group.rg.name
+  common_tags = var.common_tags
+  enabled = true
+}
