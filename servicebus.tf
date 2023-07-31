@@ -24,7 +24,7 @@ module "ccd_case_event_subscription" {
   name                = local.ccd_case_events_subscription_name
   namespace_name      = local.servicebus_namespace_name
   topic_name          = local.topic_name
-  depends_on          = module.ccd_case_event_topic
+  depends_on          = [ module.ccd_case_event_topic ]
   resource_group_name = local.resource_group_name
   requires_session    = true
   lock_duration       = "PT30S"
