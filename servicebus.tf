@@ -12,7 +12,7 @@ locals {
 
 //Topic we are depending on
 module "ccd_case_event_topic" {
-  source              = "git@github.com:hmcts/terraform-module-servicebus-topic"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
   name                = local.topic_name
   namespace_name      = local.servicebus_namespace_name
   resource_group_name = local.resource_group_name
