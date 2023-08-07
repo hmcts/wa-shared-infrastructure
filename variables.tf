@@ -74,3 +74,7 @@ variable "allowed_jurisdictions" {
   default = "'ia', 'IA', 'civil', 'CIVIL'"
   description = "Allowed jurisdictions ids for which ccd messages can be processed in case event handler"
 }
+
+variable "enable-wa-task-management-api-task-deletion-failure-alert" {
+  default = false
+}
