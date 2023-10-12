@@ -15,5 +15,6 @@ module "wa_key_vault" {
   location                   = var.location
   common_tags                = var.common_tags
   create_managed_identity    = true
+  additional_managed_identities_access = var.additional_managed_identities_access
 }
 
