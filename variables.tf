@@ -78,3 +78,9 @@ variable "allowed_jurisdictions" {
 variable "enable-wa-task-management-api-task-deletion-failure-alert" {
   default = false
 }
+
+variable "additional_managed_identities_access" {
+  type        = list(string)
+  description = "The name of your application"
+  default     = []
+}
