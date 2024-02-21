@@ -146,3 +146,26 @@ module "wa-task-deletion-failure-alert" {
   enabled                    = var.enable-wa-task-management-api-task-deletion-failure-alert
   common_tags                = var.common_tags
 }
+
+module "wa-message-readiness-check-failure-alert" {
+  source                     = "git@github.com:hmcts/cnp-module-metric-alert"
+  location                   = var.location
+
+  app_insights_name          = "wa-${var.env}"
+
+  alert_name                 = "wa-case-event-handler-message-readiness-check-failure-alert"
+  alert_desc                 = "Alert when case event handler message readiness check fails and auto restart of pod happens"
+  app_insights_query         = "traces | where message contains 'Liveness check failed' or message contains 'Readiness check failed'"
+  custom_email_subject       = "Alert: Task readiness message checks failed wa-${var.env}"
+  #run every 3 hrs for early alert
+  frequency_in_minutes       = "180"
+  # window of 1 day as data extract needs to run daily
+  time_window_in_minutes     = "1440"
+  severity_level             = "2"
+  action_group_name          = module.wa-action-group.action_group_name
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = "0"
+  resourcegroup_name         = azurerm_resource_group.rg.name
+  enabled                    = var.enable-wa-case-event-handler-message-readiness-check-failure-alert
+  common_tags                = var.common_tags
+}
