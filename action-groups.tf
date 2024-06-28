@@ -1,7 +1,7 @@
 // WA Alerts Action Groups
 
 data "azurerm_key_vault_secret" "wa_support_email" {
-  name      = "wa-support-email"
+  name         = "wa-support-email"
   key_vault_id = module.wa_key_vault.key_vault_id
 }
 
