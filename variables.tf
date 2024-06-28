@@ -71,7 +71,7 @@ variable "common_tags" {
 #this is the default value for any environment without a override file
 variable "allowed_jurisdictions" {
   type        = string
-  default = "'ia', 'IA', 'civil', 'CIVIL'"
+  default     = "'ia', 'IA', 'civil', 'CIVIL'"
   description = "Allowed jurisdictions ids for which ccd messages can be processed in case event handler"
 }
 
