@@ -5,9 +5,9 @@ locals {
   resource_group_name               = "ccd-shared-${var.env}"
   ccd_case_events_subscription_name = "${var.product}-ccd-case-events-sub-${var.env}"
   # This Expression helps create the instance only in aat by setting the count in aat to 1 and 0 on other envs.
-  message_context_instances_count   = var.env == "aat" ? 1 : 0
+  message_context_instances_count = var.env == "aat" ? 1 : 0
   # This Expression helps create the instance in all environments apart from AAT by setting the count to 0 in aat.
-  case_events_sub_rule_instances_count   = var.env == "aat" ? 0 : 1
+  case_events_sub_rule_instances_count = var.env == "aat" ? 0 : 1
 }
 
 //Create ccd case events subscription
@@ -22,17 +22,17 @@ module "ccd_case_event_subscription" {
 }
 
 resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
-  count               = local.case_events_sub_rule_instances_count
-  name                = "${var.product}-case-events-sub-rule-${var.env}"
-  subscription_id     = module.ccd_case_event_subscription.id
-  filter_type         = "SqlFilter"
-  sql_filter          = "jurisdiction_id IN (${var.allowed_jurisdictions})"
+  count           = local.case_events_sub_rule_instances_count
+  name            = "${var.product}-case-events-sub-rule-${var.env}"
+  subscription_id = module.ccd_case_event_subscription.id
+  filter_type     = "SqlFilter"
+  sql_filter      = "jurisdiction_id IN (${var.allowed_jurisdictions})"
 }
 
 resource "azurerm_servicebus_subscription_rule" "message_context" {
-  count               = local.message_context_instances_count
-  name                = "${var.product}-message-context-sub-rule-${var.env}"
-  subscription_id     = module.ccd_case_event_subscription.id
-  filter_type         = "SqlFilter"
-  sql_filter          = "jurisdiction_id IN (${var.allowed_jurisdictions})"
+  count           = local.message_context_instances_count
+  name            = "${var.product}-message-context-sub-rule-${var.env}"
+  subscription_id = module.ccd_case_event_subscription.id
+  filter_type     = "SqlFilter"
+  sql_filter      = "jurisdiction_id IN (${var.allowed_jurisdictions})"
 }
