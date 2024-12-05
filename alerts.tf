@@ -169,3 +169,24 @@ module "wa-message-readiness-check-failure-alert" {
   enabled                    = true
   common_tags                = var.common_tags
 }
+
+module "wa-task-mandatory-field-missing-alert" {
+  source   = "git@github.com:hmcts/cnp-module-metric-alert"
+  location = var.location
+
+  app_insights_name = "wa-${var.env}"
+
+  alert_name           = "wa-task-mandatory-field-missing-alert"
+  alert_desc           = "Alert when mandatory fields are missing and task fails to initiate or reconfigure for case id"
+  app_insights_query   = "union traces | where message contains \"The following mandatory fields are missing from task:\" | sort by timestamp desc"
+  custom_email_subject = "Alert: Task mandatory fields are missing wa-${var.env}"
+  frequency_in_minutes = "60"
+  time_window_in_minutes     = "60"
+  severity_level             = "2"
+  action_group_name          = "wa-support" //TODO: Change this to appropriate service group once it is created
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = "0"
+  resourcegroup_name         = azurerm_resource_group.rg.name
+  enabled                    = var.enable-wa-task-mandatory-field-missing-alert
+  common_tags                = var.common_tags
+}

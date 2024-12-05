@@ -84,3 +84,7 @@ variable "additional_managed_identities_access" {
   description = "The name of your application"
   default     = []
 }
+
+variable "enable-wa-task-mandatory-field-missing-alert" {
+  default = false
+}
