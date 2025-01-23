@@ -13,12 +13,16 @@ locals {
 //Create ccd case events subscription
 module "ccd_case_event_subscription" {
   source              = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=4.x"
+  namespace_id        = data.azurerm_servicebus_namespace.namespace.id
   name                = local.ccd_case_events_subscription_name
-  namespace_name      = local.servicebus_namespace_name
   topic_name          = local.topic_name
-  resource_group_name = local.resource_group_name
   requires_session    = true
   lock_duration       = "PT30S"
+}
+
+data "azurerm_servicebus_namespace" "namespace" {
+  name                = local.servicebus_namespace_name
+  resource_group_name = local.resource_group_name
 }
 
 resource "azurerm_servicebus_subscription_rule" "allowed_jurisdictions" {
