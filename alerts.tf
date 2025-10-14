@@ -57,7 +57,7 @@ module "wa-camunda-task-uninitiated-exception-alert" {
   frequency_in_minutes       = "60"
   time_window_in_minutes     = "60"
   severity_level             = "2"
-  action_group_name          = "wa-support"
+  action_group_name          = "wa-support-${var.env}"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
