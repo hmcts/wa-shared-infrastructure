@@ -28,3 +28,15 @@ module "wa-action-group-camunda" {
   email_receiver_name    = "WA Support Mailing List"
   email_receiver_address = data.azurerm_key_vault_secret.wa_support_email.value
 }
+
+module "wa-action-group-slack-alerting" {
+  source   = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env      = var.env
+
+  resourcegroup_name     = azurerm_resource_group.rg.name
+  action_group_name      = "wa-support-${var.env}"
+  short_name             = "wa-support-${var.env}"
+  email_receiver_name    = "WA Slack Email Alert"
+  email_receiver_address = data.azurerm_key_vault_secret.tm-alerts-slack-webhook.value
+}
