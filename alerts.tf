@@ -19,15 +19,40 @@ module "wa-exception-alert" {
   enabled                    = true
 }
 
-module "wa-camunda-task-uninitiated-exception-alert" {
+module "wa-camunda-task-uninitiated-exception-alert-summary" {
   source   = "git@github.com:hmcts/cnp-module-metric-alert"
   location = var.location
 
   app_insights_name = "wa-${var.env}"
 
-  alert_name                 = "wa-camunda-task-uninitiated-alert"
-  alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, works with 120 minute poll in wa-${var.env}."
+  alert_name                 = "wa-camunda-task-uninitiated-alert-weekly"
+  alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, runs a summary report every 7 days in wa-${var.env}."
   app_insights_query         = "union traces, exceptions | where message contains \"TASK_INITIATION_FAILURES There are some uninitiated tasks\" | sort by timestamp desc"
+  custom_email_subject       = "Alert: A task could not be initiated in wa-${var.env}"
+  frequency_in_minutes       = "10800"
+  time_window_in_minutes     = "10800"
+  severity_level             = "2"
+  action_group_name          = "wa-support"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = "0"
+  resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
+  enabled                    = true
+}
+
+module "wa-camunda-task-uninitiated-exception-alert" {
+  source   = "git@github.com:hmcts/cnp-module-metric-alert"
+  location = var.location
+
+  app_insights_name = "wa-${var.env}"
+  alert_name                 = "wa-camunda-task-uninitiated-alert"
+  alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, works with 60 minute poll in wa-${var.env}."
+  app_insights_query         = "union traces, exceptions
+                                | where message contains "TASK_INITIATION_FAILURES There are some uninitiated tasks"
+                                | where message matches regex @"created:\s*(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)"
+                                | extend created = todatetime(extract(@"created:\s*([\d-]{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)", 1, message))
+                                | where created >= ago(1h)
+                                | project timestamp, message"
   custom_email_subject       = "Alert: A task could not be initiated in wa-${var.env}"
   frequency_in_minutes       = "60"
   time_window_in_minutes     = "60"
