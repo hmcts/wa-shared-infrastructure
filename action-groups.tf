@@ -34,7 +34,7 @@ module "wa-action-group-camunda" {
   email_receiver_address = data.azurerm_key_vault_secret.wa_support_email.value
 }
 
-module "wa-action-group-slack-alerting" {
+module "tm-action-group-slack-alerting" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
