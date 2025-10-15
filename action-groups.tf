@@ -5,6 +5,11 @@ data "azurerm_key_vault_secret" "wa_support_email" {
   key_vault_id = module.wa_key_vault.key_vault_id
 }
 
+data "azurerm_key_vault_secret" "tm-alerts-slack-webhook" {
+  name         = "tm-alerts-slack-webhook"
+  key_vault_id = module.wa_key_vault.key_vault_id
+}
+
 module "wa-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
@@ -27,4 +32,16 @@ module "wa-action-group-camunda" {
   short_name             = "wa-support"
   email_receiver_name    = "WA Support Mailing List"
   email_receiver_address = data.azurerm_key_vault_secret.wa_support_email.value
+}
+
+module "tm-action-group-slack-alerting" {
+  source   = "git@github.com:hmcts/cnp-module-action-group"
+  location = "global"
+  env      = var.env
+
+  resourcegroup_name     = azurerm_resource_group.rg.name
+  action_group_name      = "tm-support-${var.env}"
+  short_name             = "tm-support-${var.env}"
+  email_receiver_name    = "TM Slack Email Alert"
+  email_receiver_address = data.azurerm_key_vault_secret.tm-alerts-slack-webhook.value
 }
