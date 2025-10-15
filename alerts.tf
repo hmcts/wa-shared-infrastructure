@@ -37,7 +37,7 @@ module "wa-camunda-task-uninitiated-exception-alert-summary" {
   trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
   common_tags                = var.common_tags
-  enabled                    = true
+  enabled                    = false
 }
 
 module "wa-camunda-task-uninitiated-exception-alert" {
@@ -62,7 +62,7 @@ module "wa-camunda-task-uninitiated-exception-alert" {
   trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
   common_tags                = var.common_tags
-  enabled                    = true
+  enabled                    = var.enable-tm-slack-alert
 }
 
 module "wa-camunda-task-unterminated-exception-alert" {
