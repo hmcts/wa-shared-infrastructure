@@ -44,7 +44,7 @@ module "wa-camunda-task-uninitiated-exception-alert" {
   source   = "git@github.com:hmcts/cnp-module-metric-alert"
   location = var.location
 
-  app_insights_name = "wa-${var.env}"
+  app_insights_name          = "wa-${var.env}"
   alert_name                 = "wa-camunda-task-uninitiated-alert"
   alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, works with 60 minute poll in wa-${var.env}."
   app_insights_query         = "union traces, exceptions | where message has 'TASK_INITIATION_FAILURES There are some uninitiated tasks' | extend created = todatetime(extract(@'created:\\s*(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z)', 1, message)) | where created >= ago(1h) | project timestamp, message"
