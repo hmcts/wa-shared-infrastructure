@@ -84,7 +84,3 @@ variable "additional_managed_identities_access" {
   description = "The name of your application"
   default     = []
 }
-
-variable "enable-tm-slack-alert" {
-  default = false
-}

@@ -41,7 +41,7 @@ module "tm-action-group-slack-alerting" {
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "tm-support-${var.env}"
-  short_name             = "tm-${var.env}"
+  short_name             = "tm-sup-${var.env}"
   email_receiver_name    = "TM Slack Email Alert"
   email_receiver_address = data.azurerm_key_vault_secret.tm-alerts-slack-webhook.value
 }
