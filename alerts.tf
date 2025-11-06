@@ -40,6 +40,47 @@ module "wa-camunda-task-uninitiated-exception-alert" {
   enabled                    = true
 }
 
+module "tm-camunda-task-uninitiated-exception-alert-summary" {
+  source   = "git@github.com:hmcts/cnp-module-metric-alert"
+  location = var.location
+
+  app_insights_name = "wa-${var.env}"
+
+  alert_name                 = "wa-camunda-task-uninitiated-alert-weekly"
+  alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, runs a summary report every 7 days in wa-${var.env}."
+  app_insights_query         = "union traces, exceptions | where message contains \"TASK_INITIATION_FAILURES There are some uninitiated tasks\" | sort by timestamp desc"
+  custom_email_subject       = "Alert: A task could not be initiated in wa-${var.env}"
+  frequency_in_minutes       = "10800"
+  time_window_in_minutes     = "10800"
+  severity_level             = "2"
+  action_group_name          = "wa-support"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = "0"
+  resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
+  enabled                    = false
+}
+
+module "tm-camunda-task-uninitiated-exception-alert" {
+  source   = "git@github.com:hmcts/cnp-module-metric-alert"
+  location = var.location
+
+  app_insights_name          = "wa-${var.env}"
+  alert_name                 = "wa-camunda-task-uninitiated-alert"
+  alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, works with 60 minute poll in wa-${var.env}"
+  app_insights_query         = "traces | project timestamp, msg=message | union (exceptions | project timestamp, msg=outerMessage) | where msg has_all (\"TASK_INITIATION_FAILURES There are some uninitiated tasks\") | parse kind=relaxed msg with * \"created: \" created_iso \"Z\" * | extend created_str = strcat(created_iso, \"Z\") | extend created = todatetime(created_str) | where isnotempty(created) and created >= ago(1h) | project timestamp, created, msg"
+  custom_email_subject       = "Alert: A task could not be initiated in wa-${var.env}"
+  frequency_in_minutes       = "60"
+  time_window_in_minutes     = "60"
+  severity_level             = "2"
+  action_group_name          = "wa-support-${var.env}"
+  trigger_threshold_operator = "GreaterThan"
+  trigger_threshold          = "0"
+  resourcegroup_name         = azurerm_resource_group.rg.name
+  common_tags                = var.common_tags
+  enabled                    = var.enable-tm-slack-alert
+}
+
 module "wa-camunda-task-unterminated-exception-alert" {
   source   = "git@github.com:hmcts/cnp-module-metric-alert"
   location = var.location
