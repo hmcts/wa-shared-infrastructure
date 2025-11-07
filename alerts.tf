@@ -40,7 +40,7 @@ module "wa-camunda-task-uninitiated-exception-alert" {
   enabled                    = true
 }
 
-module "tm-camunda-task-uninitiated-exception-alert-summary" {
+module "tm-camunda-task-uninitiated-exception-alert-slack-summary" {
   source   = "git@github.com:hmcts/cnp-module-metric-alert"
   location = var.location
 
