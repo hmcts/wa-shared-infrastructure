@@ -40,7 +40,7 @@ module "wa-camunda-task-uninitiated-exception-alert" {
   enabled                    = true
 }
 
-module "tm-camunda-task-uninitiated-exception-alert-summary" {
+module "tm-camunda-task-uninitiated-exception-alert-slack-summary" {
   source   = "git@github.com:hmcts/cnp-module-metric-alert"
   location = var.location
 
@@ -53,7 +53,7 @@ module "tm-camunda-task-uninitiated-exception-alert-summary" {
   frequency_in_minutes       = "10800"
   time_window_in_minutes     = "10800"
   severity_level             = "2"
-  action_group_name          = "wa-support"
+  action_group_name          = "tm-support-${var.env}"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
@@ -61,7 +61,7 @@ module "tm-camunda-task-uninitiated-exception-alert-summary" {
   enabled                    = false
 }
 
-module "tm-camunda-task-uninitiated-exception-alert" {
+module "tm-camunda-task-uninitiated-exception-slack-alert" {
   source   = "git@github.com:hmcts/cnp-module-metric-alert"
   location = var.location
 
