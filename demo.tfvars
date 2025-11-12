@@ -1,2 +1,2 @@
 allowed_jurisdictions = "'ia', 'IA', 'sscs', 'SSCS', 'wa', 'WA', 'civil', 'CIVIL', 'publiclaw', 'PUBLICLAW', 'privatelaw', 'PRIVATELAW', 'employment','EMPLOYMENT','st_cic','ST_CIC','DIVORCE','divorce'"
-enable-tm-slack-alert                = true
+enable-tm-slack-alert = true
