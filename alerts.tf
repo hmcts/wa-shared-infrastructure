@@ -29,15 +29,15 @@ module "tm-camunda-task-uninitiated-exception-alert-slack-summary" {
   alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, runs a summary report every 7 days in wa-${var.env}."
   app_insights_query         = "union traces, exceptions | where message contains \"TASK_INITIATION_FAILURES There are some uninitiated tasks\" | sort by timestamp desc"
   custom_email_subject       = "Alert: A task could not be initiated in wa-${var.env}"
-  frequency_in_minutes       = "10800"
-  time_window_in_minutes     = "10800"
+  frequency_in_minutes       = "1440"
+  time_window_in_minutes     = "1440"
   severity_level             = "2"
   action_group_name          = "tm-support-${var.env}"
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = "0"
   resourcegroup_name         = azurerm_resource_group.rg.name
   common_tags                = var.common_tags
-  enabled                    = var.enable-tm-slack-alert
+  enabled                    = false
 }
 
 module "tm-camunda-task-uninitiated-exception-slack-alert" {
