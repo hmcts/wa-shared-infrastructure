@@ -47,7 +47,7 @@ module "tm-camunda-task-uninitiated-exception-slack-alert" {
   app_insights_name          = "wa-${var.env}"
   alert_name                 = "wa-camunda-task-uninitiated-slack-alert"
   alert_desc                 = "Triggers when a task could not be initiated and it is saved with an unconfigured task state, works with 60 minute poll in wa-${var.env}"
-  app_insights_query         = "traces | project timestamp, msg=message | union (exceptions | project timestamp, msg=outerMessage) | where msg has_all (\"TASK_INITIATION_FAILURES There are some uninitiated tasks\") | parse kind=relaxed msg with * \"created: \" created_iso \"Z\" * | extend created_str = strcat(created_iso, \"Z\") | extend created = todatetime(created_str) | where isnotempty(created) and created >= ago(1h) | project timestamp, created, msg"
+  app_insights_query         = "traces | project timestamp, msg=message | union (exceptions | project timestamp, msg=outerMessage) | where msg has_all (\"TASK_INITIATION_FAILURES There are some uninitiated tasks\") | parse kind=relaxed msg with * \"created: \" created_iso \"Z\" * | extend created_str = strcat(created_iso, \"Z\") | extend created = todatetime(created_str) | where isnotempty(created) and created >= ago(4h) | project timestamp, created, msg"
   custom_email_subject       = "Alert: A task could not be initiated in wa-${var.env}"
   frequency_in_minutes       = "60"
   time_window_in_minutes     = "60"
