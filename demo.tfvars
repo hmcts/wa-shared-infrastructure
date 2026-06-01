@@ -1,3 +1,3 @@
 allowed_jurisdictions = "'ia', 'IA', 'sscs', 'SSCS', 'wa', 'WA', 'civil', 'CIVIL', 'publiclaw', 'PUBLICLAW', 'privatelaw', 'PRIVATELAW', 'employment','EMPLOYMENT','st_cic','ST_CIC','DIVORCE','divorce'"
 
-sampling_percentage = 100
+sampling_percentage = 1
