@@ -8,7 +8,8 @@ module "application_insights" {
   application_type    = var.appinsights_application_type
   resource_group_name = azurerm_resource_group.rg.name
 
-  common_tags = var.common_tags
+  common_tags         = var.common_tags
+  sampling_percentage = var.sampling_percentage
 }
 
 moved {

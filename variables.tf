@@ -88,3 +88,8 @@ variable "additional_managed_identities_access" {
 variable "enable-tm-slack-alert" {
   default = false
 }
+
+variable "sampling_percentage" {
+  description = "Specifies the sampling percentage for Application Insights"
+  default     = 1
+}
