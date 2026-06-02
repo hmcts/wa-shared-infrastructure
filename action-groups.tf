@@ -14,6 +14,7 @@ module "wa-action-group" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "wa-support"
@@ -26,6 +27,7 @@ module "wa-action-group-camunda" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = "camunda-${var.env}"
   action_group_name      = "wa-support"
@@ -38,6 +40,7 @@ module "tm-action-group-slack-alerting" {
   source   = "git@github.com:hmcts/cnp-module-action-group"
   location = "global"
   env      = var.env
+  tags     = var.common_tags
 
   resourcegroup_name     = azurerm_resource_group.rg.name
   action_group_name      = "tm-support-${var.env}"
