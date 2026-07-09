@@ -3,7 +3,7 @@ locals {
 }
 
 module "wa_key_vault" {
-  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-31965/remove-jenkins-ptl-access"
   name                    = local.key_vault_name
   product                 = var.product
   env                     = var.env
@@ -17,6 +17,8 @@ module "wa_key_vault" {
   common_tags                          = var.common_tags
   create_managed_identity              = true
   additional_managed_identities_access = var.additional_managed_identities_access
+
+  grant_preview_jenkins_access = var.env == "aat"
 }
 
 data "azurerm_user_assigned_identity" "jenkins" {
