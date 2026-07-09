@@ -19,6 +19,7 @@ module "wa_key_vault" {
   additional_managed_identities_access = var.additional_managed_identities_access
 
   grant_preview_jenkins_access = var.env == "aat"
+  grant_dev_jenkins_access = var.env == "stg"
 }
 
 data "azurerm_user_assigned_identity" "jenkins" {
