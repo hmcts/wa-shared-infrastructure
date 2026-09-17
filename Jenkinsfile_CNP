@@ -1,6 +1,6 @@
 #!groovy
 //noinspection GroovyUnusedAssignment
-@Library("Infrastructure@2.4.9")
+@Library("Infrastructure@2.5.4")
 
 def branchesToSync = ['demo', 'ithc', 'perftest']
 
