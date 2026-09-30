@@ -1,2 +1,2 @@
-allowed_jurisdictions = "'ia', 'IA', 'wa', 'WA', 'civil', 'CIVIL', 'privatelaw', 'PRIVATELAW','publiclaw', 'PUBLICLAW','sscs','SSCS','DIVORCE','divorce','employment','EMPLOYMENT', 'st_cic', 'ST_CIC', 'pcs', 'PCS'"
+allowed_jurisdictions = "'ia', 'IA', 'wa', 'WA', 'civil', 'CIVIL', 'privatelaw', 'PRIVATELAW','publiclaw', 'PUBLICLAW','sscs','SSCS','DIVORCE','divorce','employment','EMPLOYMENT', 'st_cic', 'ST_CIC', 'pcs', 'PCS', 'PROBATE', 'probate'"
 sampling_percentage   = 100
